@@ -14,6 +14,8 @@ game.settings = {
     gameTimer: 60000    
 }
 
+var particles;
+
 //reserve some keyboard varibles
 
-let keyF, keyLeft, keyRight;
+let keyF, keyLeft, keyRight, keyR;

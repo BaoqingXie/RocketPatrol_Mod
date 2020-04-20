@@ -36,12 +36,15 @@ class Menu extends Phaser.Scene {
         let centerY = game.config.height/2;
         let textSpacer = 64;
 
-        this.add.text(centerX, centerY- textSpacer, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY, 'Use ←→ arrows to move & (F) to Fire', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY- 3*textSpacer, 'ROCKET PATROL Moded Version', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY- 2* textSpacer, 'Use ←→ arrows to move & (F) to Fire', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY- textSpacer, 'left right Mouse Button to move', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY, 'middle and back button to fire ', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#00FF00';
         menuConfig.color = '#000';
-        this.add.text(centerX, centerY + textSpacer, 'Press ← for Easy or → for Hard', menuConfig).setOrigin(0.5);  
-        
+        this.add.text(centerX, centerY + textSpacer, 'Press ← for Easy or → for Hard', menuConfig).setOrigin(0.5); 
+        this.add.text(centerX, centerY + textSpacer + textSpacer, 'Press R to fire special Rocket', menuConfig).setOrigin(0.5);   
+        this.add.text(centerX, centerY + 3* textSpacer, 'You have three chances to use R', menuConfig).setOrigin(0.5);   
         // define keys
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -61,7 +64,7 @@ class Menu extends Phaser.Scene {
             // hard mode
             game.settings = {
                 spaceshipSpeed: 4,
-                gameTimer: 45000    
+                gameTimer: 45000   
             }
             this.sound.play('sfx_select');
             this.scene.start("playScene");    
