@@ -7,3 +7,7 @@ Four features are added to the moded version:
 2. Add a new Rocket type that is bigger. Players can use "R" to fire or use back button of the mouse to fire. This weapon will keeping flying in the game until it hit a spaceship. Player only have three chances to use them.
 3. Add the mouse control to the game, using left right button to move, middle button to fire and back button to fire special Rocket.
 4. Add particle effects when rocket hit the spaceships.
+
+Outside Resources:
+
+1. explotionParticle.png credits to cleanpng.com
