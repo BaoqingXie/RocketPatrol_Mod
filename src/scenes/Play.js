@@ -85,7 +85,7 @@ class Play extends Phaser.Scene {
 
         this.input.on('pointerdown', function (pointer) {
 
-            if (!this.p1Rocket.isFiring) {
+            if (!this.p1Rocket.isFiring && !this.gameOver) {
                 if (pointer.leftButtonDown() && this.p1Rocket.x >= 47) {
                     this.p1Rocket.x -= 10;
                 } else if (pointer.rightButtonDown() && this.p1Rocket.x <= 598) {
