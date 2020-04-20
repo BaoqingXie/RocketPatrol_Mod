@@ -1,5 +1,6 @@
 # RocketPatrol_Mod
-A Mode for RocketPatrol game
+A Mode for RocketPatrol game from Baoqing Xie
+
 
 Four features are added to the moded version:
 
