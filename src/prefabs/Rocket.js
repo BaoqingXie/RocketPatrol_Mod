@@ -46,6 +46,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
         //Rtype going up
         if (this.isFiring && this.y >= 108 && this.type==1&&this.goingback ==0) {
             this.y -= 2;
+            this.x -= 2;
             if(this.y == 109){
                 this.goingback = 1;
             }

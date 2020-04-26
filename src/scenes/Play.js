@@ -81,26 +81,35 @@ class Play extends Phaser.Scene {
 
 
         //mouse control of the game
-        this.input.mouse.disableContextMenu();
+        //this.input.mouse.disableContextMenu();
 
         this.input.on('pointerdown', function (pointer) {
 
-            if (!this.p1Rocket.isFiring && !this.gameOver) {
-                if (pointer.leftButtonDown() && this.p1Rocket.x >= 47) {
-                    this.p1Rocket.x -= 10;
-                } else if (pointer.rightButtonDown() && this.p1Rocket.x <= 598) {
-                    this.p1Rocket.x += 10;
-                } else if (pointer.middleButtonDown()) {
-                    this.p1Rocket.isFiring = true;
-                    this.p1Rocket.sfxRocket.play();  // play sfx
-                } else if (pointer.backButtonDown() && this.p1Rocket.rtypeNumber > 0) {
-                    this.p1Rocket.isFiring = true;
-                    this.p1Rocket.type = 1;
-                    this.p1Rocket.setFlipY(true); // transform to the Rtype looking
-                    this.p1Rocket.setScale(1.5);
-                    this.p1Rocket.rtypeNumber--;
-                    this.p1Rocket.sfxRocket.play();  // play sfx
-                }
+            this.input.mouse.requestPointerLock();
+            if (!this.p1Rocket.isFiring && !this.gameOver && pointer.leftButtonDown()) {
+                this.p1Rocket.isFiring = true;
+                this.p1Rocket.sfxRocket.play();  // play sfx
+            } else if (!this.p1Rocket.isFiring && !this.gameOver && pointer.rightButtonDown()) {
+                this.p1Rocket.isFiring = true;
+                this.p1Rocket.type = 1;
+                this.p1Rocket.setFlipY(true); // transform to the Rtype looking
+                this.p1Rocket.setScale(1.5);
+                this.p1Rocket.rtypeNumber--;
+                this.p1Rocket.sfxRocket.play();  // play sfx
+            }
+
+        }, this);
+
+        this.input.on('pointermove', function (pointer) {
+
+            if (!this.p1Rocket.isFiring && !this.gameOver && this.input.mouse.locked) {
+                this.p1Rocket.x += pointer.movementX;
+            }
+        }, this);
+
+        this.input.keyboard.on('keydown_Q', function (event) {
+            if (this.input.mouse.locked) {
+                this.input.mouse.releasePointerLock();
             }
         }, this);
 
