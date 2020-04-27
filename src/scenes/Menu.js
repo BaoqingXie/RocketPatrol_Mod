@@ -38,13 +38,13 @@ class Menu extends Phaser.Scene {
 
         this.add.text(centerX, centerY- 3*textSpacer, 'ROCKET PATROL Moded Version', menuConfig).setOrigin(0.5);
         this.add.text(centerX, centerY- 2* textSpacer, 'Use ←→ arrows to move & (F) to Fire', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY- textSpacer, 'left right Mouse Button to move', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY, 'middle and back button to fire ', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY- textSpacer, 'Use Mouse to move the Rocket', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY, 'Left And Right Click to fire ', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#00FF00';
         menuConfig.color = '#000';
         this.add.text(centerX, centerY + textSpacer, 'Press ← for Easy or → for Hard', menuConfig).setOrigin(0.5); 
         this.add.text(centerX, centerY + textSpacer + textSpacer, 'Press R to fire special Rocket', menuConfig).setOrigin(0.5);   
-        this.add.text(centerX, centerY + 3* textSpacer, 'You have three chances to use R', menuConfig).setOrigin(0.5);   
+        this.add.text(centerX, centerY + 3* textSpacer, 'You have ten chances to use R', menuConfig).setOrigin(0.5);   
         // define keys
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);

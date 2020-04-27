@@ -8,7 +8,8 @@ class Rocket extends Phaser.GameObjects.Sprite {
         this.sfxRocket = scene.sound.add('sfx_rocket'); // add rocket sfx
         this.type = 0; //deflaut type
         this.goingback = 0;
-        this.rtypeNumber = 3;
+        this.rtypeNumber = 10;
+        this.bounceback = 0;
     }
 
     update() {
@@ -31,7 +32,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
         //fire Rtype weapon
         if(Phaser.Input.Keyboard.JustDown(keyR)&& !this.isFiring &&this.rtypeNumber >0){
             this.setFlipY(true); // transform to the Rtype looking
-            this.setScale(1.5);
+            this.setScale(0.3);
             this.isFiring = true;
             this.sfxRocket.play();  // play sfx
             this.type = 1;
@@ -45,16 +46,33 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
         //Rtype going up
         if (this.isFiring && this.y >= 108 && this.type==1&&this.goingback ==0) {
-            this.y -= 2;
-            this.x -= 2;
+            this.y -= 1;
+            if(this.bounceback ==1){    //bouncing reaction when hit the wall
+                this.x += RocketMoveSpeed; 
+            }else{
+                this.x += RocketMoveSpeed;
+            }
+
             if(this.y == 109){
                 this.goingback = 1;
             }
         }
 
+        //change the flag when hit the wall
+        if(this.x <= 47 || this.x >= 598){
+            this.bounceback = 1;
+            if(this.x <= 47){
+                RocketMoveSpeed = 1;
+            }else{
+                RocketMoveSpeed = -1;
+            }
+            console.log("bounce");
+        }
+
+
         //Rtype going back
         if(this.goingback==1&&this.isFiring){
-            this.y += 2;
+            this.y += 1;
         }
 
         //reset on miss

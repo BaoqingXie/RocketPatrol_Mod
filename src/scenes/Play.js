@@ -79,34 +79,37 @@ class Play extends Phaser.Scene {
             this.gameOver = true;
         }, null, this);
 
-
-        //mouse control of the game
-        //this.input.mouse.disableContextMenu();
-
+        //mouse control for lanuching the rockets 
         this.input.on('pointerdown', function (pointer) {
 
             this.input.mouse.requestPointerLock();
             if (!this.p1Rocket.isFiring && !this.gameOver && pointer.leftButtonDown()) {
+                this.p1Rocket.type = 0;
                 this.p1Rocket.isFiring = true;
                 this.p1Rocket.sfxRocket.play();  // play sfx
-            } else if (!this.p1Rocket.isFiring && !this.gameOver && pointer.rightButtonDown()) {
+            } else if (!this.p1Rocket.isFiring && !this.gameOver && pointer.rightButtonDown() &&this.p1Rocket.rtypeNumber >0) {
                 this.p1Rocket.isFiring = true;
                 this.p1Rocket.type = 1;
                 this.p1Rocket.setFlipY(true); // transform to the Rtype looking
-                this.p1Rocket.setScale(1.5);
+                this.p1Rocket.setScale(0.3);
                 this.p1Rocket.rtypeNumber--;
                 this.p1Rocket.sfxRocket.play();  // play sfx
             }
 
         }, this);
 
+        //mouse control of the movement ot rocket
         this.input.on('pointermove', function (pointer) {
 
-            if (!this.p1Rocket.isFiring && !this.gameOver && this.input.mouse.locked) {
-                this.p1Rocket.x += pointer.movementX;
+            if (this.p1Rocket.x >= 47 || this.p1Rocket.x <= 598) {
+                if (!this.p1Rocket.isFiring && !this.gameOver && this.input.mouse.locked) {
+                    this.p1Rocket.x += pointer.movementX;
+                    this.p1Rocket.x = Phaser.Math.Wrap(this.p1Rocket.x, 0, game.renderer.width);
+                }
             }
         }, this);
 
+        //release the mouse lock
         this.input.keyboard.on('keydown_Q', function (event) {
             if (this.input.mouse.locked) {
                 this.input.mouse.releasePointerLock();
@@ -184,6 +187,9 @@ class Play extends Phaser.Scene {
             boom.destroy();                     // remove explosion sprite
         });
         // score increment and repaint
+        if(this.p1Rocket.type==1){ //when using Rtype rocket, -20 points from player.
+            this.p1Score -= 20;
+        }
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
         this.sound.play('sfx_explosion');

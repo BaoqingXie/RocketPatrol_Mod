@@ -30,6 +30,7 @@ game.settings = {
 }
 
 var particles;
+var RocketMoveSpeed = -1;
 
 //reserve some keyboard varibles
 
